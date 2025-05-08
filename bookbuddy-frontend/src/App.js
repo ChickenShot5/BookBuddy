@@ -25,7 +25,7 @@ function App() {
   }, [token]);
 
   const fetchBooks = async () => {
-    const res = await fetch("/api/books");
+    const res = await fetch(`${process.env.REACT_APP_API_URL}/api/books`);
     const data = await res.json();
     setBooks(data);
   };
@@ -37,7 +37,9 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const method = editingId ? "PUT" : "POST";
-    const url = editingId ? `/api/books/${editingId}` : "/api/books";
+    const url = editingId
+      ? `${process.env.REACT_APP_API_URL}/api/books/${editingId}`
+      : `${process.env.REACT_APP_API_URL}/api/books`;
 
     const res = await fetch(url, {
       method,
@@ -57,7 +59,7 @@ function App() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    const res = await fetch("/api/login", {
+    const res = await fetch(`${process.env.REACT_APP_API_URL}/api/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, password }),
@@ -76,7 +78,7 @@ function App() {
 
   const handleSignUp = async (e) => {
     e.preventDefault();
-    const res = await fetch("/api/signup", {
+    const res = await fetch(`${process.env.REACT_APP_API_URL}/api/signup`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, password }),
@@ -96,7 +98,7 @@ function App() {
   };
 
   const handleDelete = async (id) => {
-    await fetch(`/api/books/${id}`, {
+    await fetch(`${process.env.REACT_APP_API_URL}/api/books/${id}`, {
       method: "DELETE",
       headers: { Authorization: `Bearer ${token}` },
     });
@@ -237,4 +239,3 @@ function App() {
 }
 
 export default App;
-

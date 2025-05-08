@@ -7,7 +7,7 @@ export default function BookForm({ onAdd }) {
     description: "",
     condition: "",
     location: "",
-    contact: ""
+    contact: "",
   });
 
   const handleChange = (e) => {
@@ -17,10 +17,10 @@ export default function BookForm({ onAdd }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const res = await fetch("http://localhost:4000/books", {
+    const res = await fetch(`${process.env.REACT_APP_API_URL}/books`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form)
+      body: JSON.stringify(form),
     });
 
     const data = await res.json();
@@ -32,18 +32,50 @@ export default function BookForm({ onAdd }) {
       description: "",
       condition: "",
       location: "",
-      contact: ""
+      contact: "",
     });
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <input name="title" placeholder="Title" value={form.title} onChange={handleChange} required />
-      <input name="author" placeholder="Author" value={form.author} onChange={handleChange} required />
-      <input name="description" placeholder="Description" value={form.description} onChange={handleChange} />
-      <input name="condition" placeholder="Condition" value={form.condition} onChange={handleChange} />
-      <input name="location" placeholder="Location" value={form.location} onChange={handleChange} />
-      <input name="contact" placeholder="Contact" value={form.contact} onChange={handleChange} />
+      <input
+        name="title"
+        placeholder="Title"
+        value={form.title}
+        onChange={handleChange}
+        required
+      />
+      <input
+        name="author"
+        placeholder="Author"
+        value={form.author}
+        onChange={handleChange}
+        required
+      />
+      <input
+        name="description"
+        placeholder="Description"
+        value={form.description}
+        onChange={handleChange}
+      />
+      <input
+        name="condition"
+        placeholder="Condition"
+        value={form.condition}
+        onChange={handleChange}
+      />
+      <input
+        name="location"
+        placeholder="Location"
+        value={form.location}
+        onChange={handleChange}
+      />
+      <input
+        name="contact"
+        placeholder="Contact"
+        value={form.contact}
+        onChange={handleChange}
+      />
       <button type="submit">Add Book</button>
     </form>
   );
